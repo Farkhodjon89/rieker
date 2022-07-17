@@ -1,0 +1,55 @@
+import s from './mobile-search.module.scss'
+import { chunk } from '../../utils'
+import Link from 'next/link'
+import Tabs from '../Tabs'
+import React, { useState, useEffect } from 'react'
+import { useLazyQuery } from '@apollo/react-hooks'
+import client from '../../apollo/apollo-client'
+import PRODUCTS from '../../queries/products'
+import icons from '../../public/fixture'
+import ProductSlider from '../ProductSlider'
+
+const MobileSearch = ({
+  searchData,
+  tabs,
+  setSearchActiveTab,
+  setActiveMobileSearch,
+  loading,
+  searchResults,
+  searchQuery,
+}) => {
+  return (
+    <div className={s.mobileSearch}>
+      <div className={s.title}>Поиск</div>
+      <div
+        className={s.close}
+        dangerouslySetInnerHTML={{ __html: icons.times }}
+        onClick={() => setActiveMobileSearch(false)}
+      />
+      <div className={s.search}>
+        <form>
+          <label
+            for='search'
+            dangerouslySetInnerHTML={{ __html: icons.search }}
+          />
+          <input type='text' id='search' onChange={searchData} />
+        </form>
+      </div>
+      <div className={s.searchResults}>
+        {loading && !searchResults.length ? (
+          <div className={s.searchLoading}>Загрузка...</div>
+        ) : searchQuery.length && !searchResults.length ? (
+          <div className={s.searchEmpty}>Товары не найдены</div>
+        ) : searchResults.length ? (
+          searchResults.length <= 3 ? (
+            <ProductsList products={searchResults} catalogMod={true} />
+          ) : (
+            <ProductSlider products={searchResults} quantity={4} />
+          )
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+export default MobileSearch

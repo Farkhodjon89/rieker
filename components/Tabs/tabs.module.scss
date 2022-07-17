@@ -1,0 +1,132 @@
+.tab {
+  margin-bottom: 64px;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+    font-size: 16px;
+    color: #051f1c;
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 26px;
+    font-weight: normal;
+    font-size: 15px;
+    color: #4c6d6a;
+  }
+  .tabHeader {
+    &.mobileCategory {
+      overflow: auto;
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      li {
+        font-size: 14px;
+        color: #575f6a;
+        padding: 0 7px 14px 7px;
+        &:hover {
+          text-decoration: none;
+          color: #e40134;
+        }
+        a {
+          color: #575f6a;
+          &:hover {
+            text-decoration: none;
+            color: #e40134;
+          }
+        }
+      }
+    }
+  }
+  .tabHeader {
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin-bottom: 36px;
+    li {
+      font-size: 18px;
+      width: 100%;
+      font-weight: 600;
+      color: #575f6a;
+      cursor: pointer;
+      padding-bottom: 26px;
+
+      svg {
+        margin-bottom: 14px;
+        path {
+          stroke: #575f6a;
+        }
+      }
+      &.active {
+        color: #e40134;
+        border-color: #e40134;
+        svg {
+          path {
+            stroke: #e40134;
+          }
+        }
+      }
+      &:hover {
+        color: #e40134;
+        svg {
+          path {
+            stroke: #e40134;
+          }
+        }
+      }
+    }
+  }
+}
+
+.icon {
+  display: block;
+}
+
+// @media (max-width: 700px) {
+//   .tab {
+//     .tabHeader {
+//       li {
+//         font-size: 11px;
+//         &:not(.disable):hover {
+//         }
+//       }
+//     }
+//   }
+// }
+
+@media (max-width: 400px) {
+  .tab {
+    .tabHeader {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+}
+.sliderPrevArrow {
+  position: absolute;
+  left: -15px;
+  background: #fff;
+  width: 20px;
+  top: 30%;
+  height: 20px;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+.sliderNextArrow {
+  position: absolute;
+  right: -15px;
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  top: 30%;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
