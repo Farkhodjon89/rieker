@@ -74,7 +74,12 @@ const CatalogPage = ({
 export default CatalogPage
 
 export const getStaticPaths = async () => {
-  const paths = ['dlya-zhenshhin', 'dlya-muzhchin', 'uniseks'].map((x) => ({
+  const paths = [
+    'dlya-zhenshhin',
+    'dlya-muzhchin',
+    'uniseks',
+    'dlya-detej',
+  ].map((x) => ({
     params: { parent: x },
   }))
   return {

@@ -108,11 +108,13 @@ export class StaticDataSingleton {
     const menCategory = staticData.getCategoryBySlug('dlya-muzhchin', 1)
     const womenCategory = staticData.getCategoryBySlug('dlya-zhenshhin', 1)
     const unisexCategory = staticData.getCategoryBySlug('uniseks', 1)
+    const childrenCategory = staticData.getCategoryBySlug('dlya-detej', 1)
 
     return {
       men: menCategory,
       women: womenCategory,
       unisex: unisexCategory,
+      children: childrenCategory,
       allCategories: staticData.getInstance().categories.allCategories,
     }
   }
