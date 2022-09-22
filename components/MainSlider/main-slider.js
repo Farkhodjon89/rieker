@@ -1,8 +1,7 @@
-import s from "./main-slider.module.scss";
-import Slider from "react-slick";
-import { v4 as uuidv4 } from "uuid";
-import icons from "../../public/fixture";
-import Link from "next/link";
+import s from './main-slider.module.scss'
+import Slider from 'react-slick'
+import { v4 as uuidv4 } from 'uuid'
+import icons from '../../public/fixture'
 
 const SliderPrevArrow = (props) => (
   <div
@@ -10,7 +9,7 @@ const SliderPrevArrow = (props) => (
     onClick={props.onClick}
     dangerouslySetInnerHTML={{ __html: icons.arrowLeft }}
   />
-);
+)
 
 const SliderNextArrow = (props) => (
   <div
@@ -18,7 +17,7 @@ const SliderNextArrow = (props) => (
     onClick={props.onClick}
     dangerouslySetInnerHTML={{ __html: icons.arrowRight }}
   />
-);
+)
 
 const settings = {
   dots: true,
@@ -27,7 +26,7 @@ const settings = {
   slidesToScroll: 1,
   prevArrow: <SliderPrevArrow />,
   nextArrow: <SliderNextArrow />,
-};
+}
 
 const MainSlider = ({ SliderData, productMod }) => (
   <section className={!productMod ? `topSlider` : `productSlider`}>
@@ -36,9 +35,7 @@ const MainSlider = ({ SliderData, productMod }) => (
         <div key={uuidv4()} className={`${s.slider} slider`}>
           <div
             style={{
-              backgroundImage: `url(${
-                v.original ? v.original : v.image ? v.image.sourceUrl : null
-              })`,
+              backgroundImage: `url(${v.original})`,
             }}
             className={`${s.sliderImg}`}
           ></div>
@@ -46,5 +43,5 @@ const MainSlider = ({ SliderData, productMod }) => (
       ))}
     </Slider>
   </section>
-);
-export default MainSlider;
+)
+export default MainSlider

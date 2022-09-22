@@ -5,7 +5,7 @@ import icons from '../../public/fixture'
 const CategoriesBlock = ({ categories, quantity }) => (
   <section className={quantity == 4 ? s.fourBlock : s.fiveBlock}>
     {categories.map((category) => (
-      <Link href={category.link}>
+      <Link href={`/catalog/${category.link}`}>
         <a className={s.banner}>
           <div style={{ backgroundImage: `url(${category.image.sourceUrl})` }}>
             <div className={s.title}>{category.title}</div>

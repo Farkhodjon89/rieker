@@ -1,36 +1,34 @@
-import Product from "../Product";
-import Slider from "react-slick";
-import icons from "../../public/fixture"; 
+import Product from '../Product'
+import Slider from 'react-slick'
+import icons from '../../public/fixture'
 
 const SliderPrevArrow = (props) => (
   <div
-    className="sliderPrevArrow"
+    className='sliderPrevArrow'
     onClick={props.onClick}
     dangerouslySetInnerHTML={{ __html: icons.arrowLeft }}
   />
-);
+)
 
 const SliderNextArrow = (props) => (
   <div
-    className="sliderNextArrow"
+    className='sliderNextArrow'
     onClick={props.onClick}
     dangerouslySetInnerHTML={{ __html: icons.arrowRight }}
   />
-);
-
-
+)
 
 const ProductSlider = ({ products, quantity }) => {
   const settings = {
     infinite: true,
     dots: true,
     rows: 1,
-    slidesToShow: quantity ? quantity : 3,
-    slidesToScroll: quantity ? quantity : 3,
+    slidesToShow: quantity ? quantity : 5,
+    slidesToScroll: quantity ? quantity : 5,
     prevArrow: <SliderPrevArrow />,
     nextArrow: <SliderNextArrow />,
     responsive: [
-        {
+      {
         breakpoint: 770,
         settings: {
           slidesToShow: 2,
@@ -40,16 +38,16 @@ const ProductSlider = ({ products, quantity }) => {
         },
       },
     ],
-  };
+  }
   return (
-    <section className="product-slider">
+    <section className='product-slider'>
       <Slider {...settings}>
         {products.map((product) => (
           <Product product={product} />
         ))}
       </Slider>
     </section>
-  );
-};
+  )
+}
 
-export default ProductSlider;
+export default ProductSlider
