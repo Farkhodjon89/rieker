@@ -9,7 +9,8 @@ const settings = {
   slidesToScroll: 1,
   infinite: true,
   autoplay: true,
-  speed: 3000,
+  autoplaySpeed: 3000,
+  autoplaySpeed: 3000,
   cssEase: 'linear',
 }
 
