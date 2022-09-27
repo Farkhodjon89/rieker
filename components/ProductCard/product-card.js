@@ -1,8 +1,9 @@
+import { useCallback } from 'react'
 import s from './product-card.module.scss'
 import ImageGallery from 'react-image-gallery'
 import icons from '../../public/fixture'
 import { useState, useEffect } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import Accordion from '../Accordion'
 import { getPrice, getFormat, getDiscount } from '../../utils'
 import ProductsList from '../../components/ProductsList'
 import SectionTitle from '../SectionTitle'
@@ -111,6 +112,10 @@ const ProductCard = ({
     setSelectedProductSize(e)
     setSelectedProductId(moki.databaseId)
   }
+
+  const getPropValue = useCallback((key) => {
+    return product?.[key]?.nodes?.[0]?.name
+  }, [])
 
   return (
     <section className={s.productCard}>
@@ -261,6 +266,22 @@ const ProductCard = ({
                 Бесплатная доставка при заказе свыше <br />1 000 000 сум по
                 Ташкенту осуществляется в течении 24 часов с момента заказа
               </div>
+              <Accordion
+                title='Характеристики товара'
+                icon={icons.tabInfo}
+                noMargin
+              >
+                <div className={s.content}>
+                  -Стелька: {getPropValue('paSteels')}
+                  <br />
+                  -Материал верха: {getPropValue('paTopMaterials')}
+                  <br />
+                  -Материал подошвы: {getPropValue('paSoleMaterials')}
+                  <br />
+                  -Тип обуви: {getPropValue('paShoesTypes')}
+                  <br />
+                </div>
+              </Accordion>
               <OfferTwo />
               <div
                 className={`${s.addToCartMobile} ${

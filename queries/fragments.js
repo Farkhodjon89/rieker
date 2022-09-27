@@ -46,6 +46,26 @@ export const _SimpleProduct = gql`
         name
       }
     }
+    paSteels {
+      nodes {
+        name
+      }
+    }
+    paTopMaterials {
+      nodes {
+        name
+      }
+    }
+    paSoleMaterials {
+      nodes {
+        name
+      }
+    }
+    paShoesTypes {
+      nodes {
+        name
+      }
+    }
     woocsRegularPrice
     woocsSalePrice
   }
@@ -68,6 +88,26 @@ export const _VariableProduct = gql`
       }
     }
     paSizes {
+      nodes {
+        name
+      }
+    }
+    paSteels {
+      nodes {
+        name
+      }
+    }
+    paTopMaterials {
+      nodes {
+        name
+      }
+    }
+    paSoleMaterials {
+      nodes {
+        name
+      }
+    }
+    paShoesTypes {
       nodes {
         name
       }
