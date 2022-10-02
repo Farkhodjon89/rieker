@@ -33,6 +33,7 @@ jobs:
           host: ${{ secrets.CI_HOST }}
           username: ${{ secrets.CI_USER }}
           key: ${{ secrets.CI_KEY }}
+          command_timeout: 60m
           envs: WORKING_DIR
           script: |
             export WORKING_DIR=${{ env.WORKING_DIR }}
