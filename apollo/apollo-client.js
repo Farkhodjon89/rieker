@@ -14,16 +14,16 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
-// const defaultOptions = {
-//   watchQuery: {
-//     fetchPolicy: 'no-cache',
-//     errorPolicy: 'ignore'
-//   },
-//   query: {
-//     fetchPolicy: 'no-cache',
-//     errorPolicy: 'all'
-//   }
-// }
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
 
 export const middleware = new ApolloLink((operation, forward) => {
   const authNeededQueries = ['ORDER']
@@ -57,7 +57,7 @@ const client = new ApolloClient({
     )
   ),
   cache: new InMemoryCache({ fragmentMatcher }),
-  //defaultOptions: defaultOptions
+  defaultOptions,
 })
 
 export default client

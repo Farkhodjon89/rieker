@@ -4,9 +4,8 @@ import ProductCard from '../../components/ProductCard'
 import client from '../../apollo/apollo-client'
 import { useState } from 'react'
 import PRODUCT from '../../queries/product'
-import PRODUCTS, { PRODUCTS_SLUG } from '../../queries/products'
+import { PRODUCTS_SLUG } from '../../queries/products'
 import { connect } from 'react-redux'
-import { getPrice } from '../../utils'
 import { addToCart, deleteFromCart } from '../../redux/actions/cartActions'
 import {
   addToWishlist,
@@ -75,65 +74,58 @@ const Product = ({
   )
 }
 
-// export const getStaticPaths = async () => {
-//   const paths = []
+export const getStaticPaths = async () => {
+  const paths = []
 
-//   const fetchProducts = async (after) => {
-//     const _tempProductsResult = await client.query({
-//       query: PRODUCTS_SLUG,
-//       variables: {
-//         first: 10,
-//         ...(after ? { after } : {}),
-//       },
-//     })
-
-//     paths.push(
-//       ..._tempProductsResult.data.products.nodes.map((product) => ({
-//         params: { slug: product.slug },
-//       }))
-//     )
-
-//     if (_tempProductsResult.data.products.pageInfo.hasNextPage) {
-//       await fetchProducts(_tempProductsResult.data.products.pageInfo.endCursor)
-//     }
-//   }
-
-//   if (process.env.NODE_ENV === 'production') {
-//     await fetchProducts()
-//   }
-//   return {
-//     paths,
-//     fallback: 'blocking',
-//   }
-// }
-
-export async function getServerSideProps({ params }) {
-  let response
-
-  try {
-    response = await client.query({
-      query: PRODUCT,
-      variables: { id: params.slug },
+  const fetchSlugs = async (after) => {
+    const slugs = await client.query({
+      query: PRODUCTS_SLUG,
+      variables: {
+        first: 10,
+        ...(after ? { after } : {}),
+      },
     })
-  } catch (e) {
-    return {
-      notFound: true,
-      // revalidate: 30,
+
+    paths.push(
+      ...slugs.data.products.nodes.map((product) => ({
+        params: { slug: product.slug },
+      }))
+    )
+
+    if (slugs.data.products.pageInfo.hasNextPage) {
+      await fetchSlugs(slugs.data.products.pageInfo.endCursor)
     }
   }
 
+  if (process.env.NODE_ENV === 'production') {
+    await fetchSlugs()
+  }
+
+  return {
+    paths,
+    fallback: 'blocking',
+  }
+}
+
+export async function getStaticProps({ params }) {
   const staticData = new StaticDataSingleton()
   await staticData.checkAndFetch()
-
   const categories = staticData.getRootCategories()
+
+  const response = await client.query({
+    query: PRODUCT,
+    variables: { id: params.slug },
+  })
 
   return {
     props: {
       product: response.data.product,
       categories: categories.allCategories,
     },
+    revalidate: 60,
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     cartItems: state.cartData,

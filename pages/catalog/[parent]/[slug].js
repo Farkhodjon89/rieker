@@ -1,13 +1,8 @@
-import React from 'react'
-
 import Layout from '../../../components/Layout'
 import Breadcrumbs from '../../../components/Breadcrumbs'
 import Catalog from '../../../components/Catalog'
 import client from '../../../apollo/apollo-client'
 import PRODUCTS from '../../../queries/products'
-import SIZES from '../../../queries/sizes'
-import COLORS from '../../../queries/colors'
-import BRANDS from '../../../queries/brands'
 import SectionTitile from '../../../components/SectionTitle'
 import { StaticDataSingleton } from '../../../utils/staticData'
 import { HeadData } from '../../../components/Head'
@@ -80,40 +75,41 @@ const CatalogPage = ({
   )
 }
 
-// export const getStaticPaths = async () => {
-//   const staticData = new StaticDataSingleton();
-//   await staticData.checkAndFetch();
-
-//   const men = [];
-//   const women = [];
-//   const unisex = [];
-//   const girl = [];
-
-//   staticData.getAllChildrenSlugs("dlya-muzhchin", men);
-//   staticData.getAllChildrenSlugs("dlya-zhenshhin", women);
-//   staticData.getAllChildrenSlugs("uniseks", unisex);
-
-//   const paths = [
-//     ...men.map((slug) => ({ params: { parent: "dlya-muzhchin", slug } })),
-//     ...women.map((slug) => ({ params: { parent: "dlya-zhenshhin", slug } })),
-//     ...unisex.map((slug) => ({ params: { parent: "uniseks", slug } })),
-//     { params: { parent: "dlya-muzhchin", slug: "sale" } },
-//     { params: { parent: "dlya-zhenshhin", slug: "sale" } },
-//     { params: { parent: "uniseks", slug: "sale" } },
-//   ];
-
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// };
-
-export async function getServerSideProps({ params }) {
+export const getStaticPaths = async () => {
   const staticData = new StaticDataSingleton()
   await staticData.checkAndFetch()
 
-  const categories = staticData.getRootCategories()
+  const men = []
+  const women = []
+  const unisex = []
+  const children = []
 
+  staticData.getAllChildrenSlugs('dlya-muzhchin', men)
+  staticData.getAllChildrenSlugs('dlya-zhenshhin', women)
+  staticData.getAllChildrenSlugs('uniseks', unisex)
+  staticData.getAllChildrenSlugs('dlya-detej', children)
+
+  const paths = [
+    ...men.map((slug) => ({ params: { parent: 'dlya-muzhchin', slug } })),
+    ...women.map((slug) => ({ params: { parent: 'dlya-zhenshhin', slug } })),
+    ...unisex.map((slug) => ({ params: { parent: 'uniseks', slug } })),
+    ...children.map((slug) => ({ params: { parent: 'dlya-detej', slug } })),
+    { params: { parent: 'dlya-muzhchin', slug: 'sale' } },
+    { params: { parent: 'dlya-zhenshhin', slug: 'sale' } },
+    { params: { parent: 'uniseks', slug: 'sale' } },
+    { params: { parent: 'dlya-detej', slug: 'sale' } },
+  ]
+
+  return {
+    paths,
+    fallback: 'blocking',
+  }
+}
+
+export async function getStaticProps({ params }) {
+  const staticData = new StaticDataSingleton()
+  await staticData.checkAndFetch()
+  const categories = staticData.getRootCategories()
   const parentCategory = staticData.getCategoryBySlug(params.parent, 1)
 
   const category = staticData.getCategoryBySlug(
@@ -139,7 +135,7 @@ export async function getServerSideProps({ params }) {
       category,
       categories: categories.allCategories,
     },
-    // revalidate: 60,
+    revalidate: 60,
   }
 }
 
