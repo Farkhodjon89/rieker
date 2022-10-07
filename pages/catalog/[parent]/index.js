@@ -21,7 +21,7 @@ const CatalogPage = ({
   category,
   categories,
 }) => {
-  const categoriesFilter = category.children.map(({ name, slug }) => ({
+  const categoriesFilter = category?.children?.map(({ name, slug }) => ({
     name,
     link: `/catalog/${category.slug}/${slug}`,
   }))
@@ -32,8 +32,8 @@ const CatalogPage = ({
       link: '/',
     },
     {
-      name: category.name,
-      link: `/catalog/${category.slug}`,
+      name: category?.name,
+      link: `/catalog/${category?.slug}`,
     },
   ]
 

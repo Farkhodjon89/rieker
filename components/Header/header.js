@@ -98,7 +98,7 @@ const Header = ({
 
   const searchData = (e) => {
     setSearchResults([])
-    
+
     setSearchQuery(e.target.value)
 
     if (searchQuery.length) {
@@ -349,12 +349,7 @@ const Header = ({
                     {/* {parentCategories} */}
                     {ct}
                     <li>
-                      <Link
-                        href={{
-                          pathname: '/catalog',
-                          query: { onSale: 'sale' },
-                        }}
-                      >
+                      <Link href='/catalog/sale'>
                         <a style={{ color: 'red' }}>Скидки</a>
                       </Link>
                     </li>

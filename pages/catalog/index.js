@@ -30,7 +30,7 @@ const CatalogPage = ({
     },
     {
       name: 'Скидки',
-      link: '/catalog?onSale=sale',
+      link: '/catalog/sale',
     },
   ]
 
@@ -68,14 +68,14 @@ const CatalogPage = ({
 
 export default CatalogPage
 
-export async function getStaticProps({ query }) {
+export async function getStaticProps() {
   const staticData = new StaticDataSingleton()
   await staticData.checkAndFetch()
   const categories = staticData.getRootCategories()
 
   const productsResponse = await client.query({
     query: PRODUCTS,
-    variables: { first: 9, onSale: query?.onSale === 'sale' ? true : false },
+    variables: { first: 9 },
   })
 
   return {

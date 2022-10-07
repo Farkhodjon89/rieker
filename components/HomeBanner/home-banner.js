@@ -4,7 +4,7 @@ import icons from '../../public/fixture'
 import Link from 'next/link'
 
 const HomeBanner = () => (
-  <Link href='/catalog?onSale=sale'>
+  <Link href='/catalog/sale'>
     <a className={s.home}></a>
   </Link>
 )
