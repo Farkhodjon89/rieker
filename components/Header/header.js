@@ -90,7 +90,6 @@ const Header = ({
   })
 
   useEffect(() => {
-    console.log(data)
     if (data && searchQuery.length) {
       setSearchResults(data.products.nodes)
     }
