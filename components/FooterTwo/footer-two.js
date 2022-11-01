@@ -32,7 +32,7 @@ const FooterTwo = () => (
                 <div
                   className={`col-lg-3 col-xl-3 col-md-4 col-sm-12 ${s.right}`}
                 >
-                  <Link href='https://billz.uz'>
+                  <Link href='https://billz.io'>
                     <a target='_blank'>
                       E-commerce решение от
                       <span
