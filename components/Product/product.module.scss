@@ -22,18 +22,6 @@
 .productTop {
   position: relative;
   margin-bottom: 20px;
-  &:hover {
-    .addToCart {
-      display: block;
-    }
-    .addToWishlist {
-      svg {
-        path {
-          stroke: #090e15;
-        }
-      }
-    }
-  }
   .img {
     width: 100%;
     height: 270px;
@@ -57,12 +45,26 @@
       background: #00554c;
     }
   }
+  .magnifier {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: transparent;
+    border: 0;
+  }
   .addToWishlist {
     position: absolute;
     top: 20px;
-    right: 19px;
+    right: 20px;
     background: transparent;
     border: 0;
+    &:hover {
+      svg {
+        path {
+          stroke: #090e15;
+        }
+      }
+    }
     &.active {
       svg {
         fill: #090e15;
@@ -170,6 +172,9 @@
 }
 
 @media (max-width: 800px) {
+  .magnifier {
+    display: none;
+  }
   .productTop {
     .img {
       width: 100%;
@@ -187,8 +192,6 @@
   .productTop {
     .img {
       height: 240px;
-    }
-    .addToWishlist {
     }
   }
   .heightMin {

@@ -12,6 +12,7 @@ import InstantBuyModal from '../InstantBuyModal'
 import OfferTwo from '../OfferTwo'
 import MainSlider from '../MainSlider'
 import Link from 'next/link'
+import InstantBuyModal2 from '../InstantBuyModal2'
 
 const ProductCard = ({
   product,
@@ -103,6 +104,8 @@ const ProductCard = ({
   const discountPrice = getDiscount(normalPrice, salePrice)
 
   const [buy, setBuy] = useState(false)
+  const [buy2, setBuy2] = useState(false)
+
   let sizes = []
 
   const changeSize = (e) => {
@@ -132,7 +135,7 @@ const ProductCard = ({
                 showFullscreenButton={false}
                 autoPlay={false}
                 showNav={false}
-                thumbnailPosition={windowWidth >= 1023 ? 'left' : 'bottom'}
+                thumbnailPosition='left'
               />
             </div>
           </div>
@@ -201,7 +204,7 @@ const ProductCard = ({
                           selectedProductSize,
                           selectedProductId
                         )
-                        getActiveStatus(true)
+                        setBuy2(true)
                         process.env.NODE_ENV === 'production' &&
                           fbq('track', 'AddToCart', {
                             value: product.onSale
@@ -236,6 +239,17 @@ const ProductCard = ({
                   normalPrice={normalPrice}
                   salePrice={salePrice}
                   changeSize={changeSize}
+                />
+                <InstantBuyModal2
+                  buy={buy2}
+                  setBuy={setBuy2}
+                  product={product}
+                  selectedProductColor={selectedProductColor}
+                  selectedProductSize={selectedProductSize}
+                  normalPriceFront={normalPriceFront}
+                  salePriceFront={salePriceFront}
+                  salePrice={salePrice}
+                  cartItemsLength={cartItems.length}
                 />
                 <button
                   className={`${s.addToWishlist} ${

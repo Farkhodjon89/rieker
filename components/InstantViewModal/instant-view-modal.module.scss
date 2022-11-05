@@ -1,0 +1,126 @@
+.modalOverlay {
+  z-index: 15;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 34, 34, 0.7);
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  background: #fff;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.salePrice {
+  color: #f20000;
+}
+.normalPrice {
+  text-decoration-line: line-through;
+  color: #787878;
+  margin-left: 20px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.discountPrice {
+  width: 45px;
+  height: 25px;
+  color: #4c6d6a;
+
+  font-weight: 400;
+  font-size: 13px;
+  background: #fff;
+  border: 1px solid #4c6d6a;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.size {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  .sizeChart {
+    font-weight: 500;
+    font-size: 16px;
+    color: #00554c;
+  }
+}
+.sizeSelection {
+  width: 100%;
+
+  select {
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none;
+    background: url('/CaretDown.svg') no-repeat right;
+    background-position-x: 97%;
+    width: 100%;
+    font-size: 15px;
+    color: #4c6d6a;
+    padding: 12px 20px;
+    border-radius: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.color,
+.selectedSize {
+  font-weight: 500;
+  font-size: 14px;
+  color: #051f1c;
+  span {
+    font-weight: 400;
+  }
+}
+
+.color {
+  margin-bottom: 20px;
+}
+
+.link {
+  display: block;
+  text-align: center;
+  width: '100%';
+  background-color: #fa7e26;
+  padding: 16px 0;
+  color: white !important;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.cart {
+  width: 100%;
+  padding: 16px 0;
+  color: #fa7e26;
+  border: 1px solid #8c9896;
+  background-color: white;
+}
+
+.product {
+  display: block;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: 600;
+}
