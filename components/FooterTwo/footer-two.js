@@ -32,9 +32,9 @@ const FooterTwo = () => (
                 <div
                   className={`col-lg-3 col-xl-3 col-md-4 col-sm-12 ${s.right}`}
                 >
-                  <Link href='https://billz.io'>
-                    <a target='_blank'>
-                      E-commerce решение от
+                  <Link href='https://billz.io/online-store'>
+                    <a target="_blank" rel="nofollow, noreferrer">
+                      Сайт разработан компанией
                       <span
                         dangerouslySetInnerHTML={{ __html: icons.billzLogo }}
                       />
