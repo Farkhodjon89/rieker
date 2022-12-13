@@ -1,3 +1,4 @@
+import { useMemo, useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import Offer from '../components/Offer'
 import PRODUCTS from '../queries/products'
@@ -10,21 +11,34 @@ import { HeadData } from '../components/Head'
 import ProductSlider from '../components/ProductSlider'
 import MainSlider from '../components/MainSlider2/main-slider'
 
-const Index = ({ categories, categoriesblock, newProduct }) => (
-  <>
-    <HeadData />
-    <Layout categories={categories}>
-      <MainSlider SliderData={['1.png', '2.png', '3.png']} />
-      <div className='container'>
-        <SectionTitle title='популярные Категории' />
-        <CategoriesBlock categories={categoriesblock} />
-        <SectionTitle title='новые поступления' />
-        <ProductSlider products={newProduct} />
-        <Offer />
-      </div>
-    </Layout>
-  </>
-)
+const Index = ({ categories, categoriesblock, newProduct }) => {
+  const [windowWidth, setWindowWidth] = useState()
+  let resizeWindow = () => {
+    setWindowWidth(window.innerWidth)
+  }
+  useEffect(() => {
+    resizeWindow()
+    window.addEventListener('resize', resizeWindow)
+    return () => window.removeEventListener('resize', resizeWindow)
+  }, [])
+  const mainSliders = useMemo(() => ['1.png', '2.png', windowWidth > 420 ? '3.png' : '4.png'], [windowWidth])
+
+  return (
+    <>
+      <HeadData />
+      <Layout categories={categories}>
+        <MainSlider SliderData={mainSliders} />
+        <div className='container'>
+          <SectionTitle title='популярные Категории' />
+          <CategoriesBlock categories={categoriesblock} />
+          <SectionTitle title='новые поступления' />
+          <ProductSlider products={newProduct} />
+          <Offer />
+        </div>
+      </Layout>
+    </>
+  )
+}
 
 export async function getStaticProps() {
   const staticData = new StaticDataSingleton()
