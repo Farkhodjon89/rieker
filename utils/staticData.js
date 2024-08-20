@@ -123,7 +123,7 @@ export class StaticDataSingleton {
     const staticData = new StaticDataSingleton().getInstance()
 
     const category = staticData.categories.list.find((c) => c.slug === slug)
-    const parentCategory = category.parent
+    const parentCategory = category?.parent
       ? staticData.categories.list.find((c) => c.slug === category.parent)
       : null
     if (childrenDeepLevel === 0) {
@@ -136,7 +136,7 @@ export class StaticDataSingleton {
       return {
         ...category,
         parent: parentCategory,
-        children: category.children.map((slug) =>
+        children: category?.children.map((slug) =>
           new StaticDataSingleton().getCategoryChildren(
             slug,
             childrenDeepLevel - 1
